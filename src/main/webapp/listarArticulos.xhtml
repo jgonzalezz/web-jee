@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Listar Personas</title>
+</h:head>
+<h:body>
+	<p:ajaxStatus style="width:16px; heigth:16px;" id="ajaxStatusPanel">
+		<f:facet name="start">
+			<h:graphicImage library="images" name="ajaxloading.gif" />
+		</f:facet>
+		<f:facet name="complete">
+			<h:outputText value="" />
+		</f:facet>
+	</p:ajaxStatus>
+	<h:form prependId="false">
+		<p:growl id="mesagges" showDetail="true" />
+		<p:dataTable value="#{articuloBean.articulos}" var="articulo"
+			editable="true">
+			<f:facet name="header">Lista de Artículos</f:facet>
+			<p:column headerText="Id Articulo">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{articulo.idArticulo}" />
+					</f:facet>
+					<f:facet name="input">
+						<h:inputText value="#{articulo.idArticulo}" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+			<p:column headerText="Descripcion Artículo">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{articulo.descripcion}" />
+					</f:facet>
+					<f:facet name="input">
+						<h:inputText value="#{articulo.descripcion}" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+			<p:column headerText="Precio de venta">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{articulo.precioVenta}" />
+					</f:facet>
+					<f:facet name="input">
+						<h:inputText value="#{articulo.precioVenta}" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+			<p:column headerText="Opciones">
+				<p:rowEditor /> Editar
+			</p:column>
+			<p:ajax event="rowEdit" listener="#{articuloBean.editListener}"></p:ajax>
+			<f:facet name="footer">
+				<h:commandButton value="Regresar" action="index" />
+			</f:facet>
+		</p:dataTable>
+	</h:form>
+</h:body>
+
+</html>
